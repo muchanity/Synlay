@@ -40,6 +40,10 @@ int load_config(const char* filename) {
 }
 
 int main(int argc, char* argv[]) {
+    // Unterdrücke Compiler-Warnings für unused parameters
+    (void)argc;
+    (void)argv;
+
     if (load_config(CONFIG_FILE) != 0) {
         fprintf(stderr, "Fehler beim Laden der Konfiguration\n");
         return 1;

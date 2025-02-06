@@ -1,9 +1,0 @@
-┌─MSCAD SYSTEM OVERVIEW ───────────────┐
-│ SYSTEM CHECK:  {SYSTEM_CHECK}        │
-│ NETWORK:       {NETWORK}             │
-│ CPU INFO:      {CPU}                 │
-│ RAM STATUS:    {RAM}                 │
-│ TEMPERATURE:   {TEMPERATURE}         │
-│ STORAGE:       {STORAGE}             │
-│ PERFORMANCE:   {PERFORMANCE}         │
-└───────────────────────────────────────┘

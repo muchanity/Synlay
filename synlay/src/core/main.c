@@ -2,10 +2,6 @@
 #include <stdlib.h>
 #include "../../include/synlay.h"
 
-// Funktionsdeklarationen
-float get_cpu_temperature();
-float get_cpu_usage();
-
 int main() {
     MetricConfig* config = load_config("configs/synlay.config");
     

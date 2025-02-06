@@ -14,11 +14,18 @@ MetricConfig* load_config(const char* path) {
     config->count = 0;
 
     char line[100];
-    while (fgets(line, sizeof(line), file)) {
+    while (fgets(line, sizeof(line), file) && config->count < MAX_METRICS) {
         char name[MAX_METRIC_NAME];
         int enabled;
 
-        if (sscanf(line, "%49[^=]=%d", name, &enabled) == 2) {
+        // Entferne Whitespace am Anfang und Ende
+        char* trimmed = line;
+        while (*trimmed && (*trimmed == ' ' || *trimmed == '\t')) trimmed++;
+        
+        // Ignoriere Kommentare und leere Zeilen
+        if (*trimmed == '#' || *trimmed == '\n' || *trimmed == '\0') continue;
+
+        if (sscanf(trimmed, "%49[^=]=%d", name, &enabled) == 2) {
             strncpy(config->metrics[config->count].name, name, MAX_METRIC_NAME);
             config->metrics[config->count].enabled = enabled;
             config->count++;
@@ -30,6 +37,8 @@ MetricConfig* load_config(const char* path) {
 }
 
 int is_metric_enabled(MetricConfig* config, const char* name) {
+    if (!config) return 0;
+
     for (int i = 0; i < config->count; i++) {
         if (strcmp(config->metrics[i].name, name) == 0) {
             return config->metrics[i].enabled;
@@ -39,6 +48,11 @@ int is_metric_enabled(MetricConfig* config, const char* name) {
 }
 
 void print_available_metrics(MetricConfig* config) {
+    if (!config) {
+        printf("Keine Konfiguration geladen.\n");
+        return;
+    }
+
     printf("Verfügbare Metriken:\n");
     for (int i = 0; i < config->count; i++) {
         printf("%s: %s\n", 

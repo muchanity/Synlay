@@ -14,9 +14,13 @@ typedef struct {
     int count;
 } MetricConfig;
 
-// Funktionsdeklarationen
+// Konfigurationsfunktionen
 MetricConfig* load_config(const char* path);
 int is_metric_enabled(MetricConfig* config, const char* name);
 void print_available_metrics(MetricConfig* config);
+
+// CPU-Metrik Funktionen
+float get_cpu_temperature(void);
+float get_cpu_usage(void);
 
 #endif // SYNLAY_H
